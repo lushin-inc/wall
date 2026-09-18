@@ -1,0 +1,366 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Culture Wall</title>
+<meta name="description" content="All 35 culture tiles in wall order. Open any tile to read what it means.">
+<link rel="canonical" href="https://lushin-inc.github.io/culture-wall/">
+
+<meta property="og:type" content="website">
+<meta property="og:site_name" content="Culture Wall">
+<meta property="og:title" content="Culture Wall">
+<meta property="og:description" content="All 35 culture tiles in wall order. Open any tile to read what it means.">
+<meta property="og:url" content="https://lushin-inc.github.io/culture-wall/">
+<meta property="og:image" content="https://lushin-inc.github.io/culture-wall/og.png">
+<meta property="og:image:secure_url" content="https://lushin-inc.github.io/culture-wall/og.png">
+<meta property="og:image:alt" content="Culture Wall">
+
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:title" content="Culture Wall">
+<meta name="twitter:description" content="All 35 culture tiles in wall order. Open any tile to read what it means.">
+<meta name="twitter:image" content="https://lushin-inc.github.io/culture-wall/og.png">
+
+<meta name="theme-color" content="#F2F3F7">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-status-bar-style" content="default">
+<meta name="apple-mobile-web-app-title" content="Culture Wall">
+<link rel="apple-touch-icon" href="apple-touch-icon.png">
+<link rel="icon" type="image/png" href="favicon.png">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600&display=swap">
+<style>
+  :root {
+    --bg: #F2F3F7;
+    --surface: #FFFFFF;
+    --surface-2: #E9EBF3;
+    --ink: #21245C;
+    --ink-soft: #62668D;
+    --ink-faint: #8A8EAF;
+    --line: #DFE2EE;
+    --accent: #00ADED;
+    --accent-ink: #FFFFFF;
+    --shadow: 0 10px 28px rgba(33, 36, 92, .12);
+    --shadow-sm: 0 2px 8px rgba(33, 36, 92, .08);
+  }
+  :root:not([data-theme="light"]) { color-scheme: light; }
+  @media (prefers-color-scheme: dark) {
+    :root:not([data-theme="light"]) {
+      --bg: #101229;
+      --surface: #1B1E42;
+      --surface-2: #262A56;
+      --ink: #EDEEF6;
+      --ink-soft: #A7ABCF;
+      --ink-faint: #7C81A8;
+      --line: #2E3365;
+      --accent: #3AC6F5;
+      --accent-ink: #0B1026;
+      --shadow: 0 10px 28px rgba(0, 0, 0, .45);
+      --shadow-sm: 0 2px 8px rgba(0, 0, 0, .35);
+      color-scheme: dark;
+    }
+  }
+  :root[data-theme="dark"] {
+    --bg: #101229;
+    --surface: #1B1E42;
+    --surface-2: #262A56;
+    --ink: #EDEEF6;
+    --ink-soft: #A7ABCF;
+    --ink-faint: #7C81A8;
+    --line: #2E3365;
+    --accent: #3AC6F5;
+    --accent-ink: #0B1026;
+    --shadow: 0 10px 28px rgba(0, 0, 0, .45);
+    --shadow-sm: 0 2px 8px rgba(0, 0, 0, .35);
+    color-scheme: dark;
+  }
+
+  * { box-sizing: border-box; }
+
+  body {
+    margin: 0;
+    background: var(--bg);
+    color: var(--ink);
+    font-family: 'Poppins', -apple-system, BlinkMacSystemFont, 'Segoe UI', Arial, sans-serif;
+    font-size: 16px;
+    line-height: 1.5;
+    -webkit-font-smoothing: antialiased;
+    -webkit-tap-highlight-color: transparent;
+  }
+  img { max-width: 100%; }
+
+  .wrap {
+    margin: 0 auto;
+    padding-inline: 16px;
+    padding-block: 18px 48px;
+    display: flex;
+    flex-direction: column;
+    gap: 18px;
+  }
+  .wrap-wall { max-width: 1180px; }
+  .wrap-tile { max-width: 720px; }
+
+  /* ---- top bar ---- */
+  .topbar { display: flex; align-items: center; justify-content: space-between; gap: 12px; }
+  .topbar h1 {
+    margin: 0;
+    font-size: 17px;
+    font-weight: 500;
+    letter-spacing: -0.01em;
+    color: var(--ink-soft);
+  }
+  .back {
+    display: inline-flex;
+    align-items: center;
+    gap: 4px;
+    font-size: 15px;
+    font-weight: 500;
+    color: var(--ink-soft);
+    text-decoration: none;
+    padding: 6px 10px 6px 4px;
+    border-radius: 999px;
+  }
+  .back:hover { color: var(--ink); }
+  .back svg { width: 18px; height: 18px; flex: none; }
+  .back:focus-visible { outline: 3px solid var(--accent); outline-offset: 2px; }
+
+  .theme-btn {
+    appearance: none;
+    border: 1px solid var(--line);
+    background: var(--surface);
+    color: var(--ink-soft);
+    width: 42px; height: 42px;
+    border-radius: 999px;
+    display: grid; place-items: center;
+    cursor: pointer; flex: none;
+    transition: border-color .15s ease, color .15s ease;
+  }
+  .theme-btn:hover { color: var(--ink); border-color: var(--ink-faint); }
+  .theme-btn:focus-visible { outline: 3px solid var(--accent); outline-offset: 3px; }
+  .theme-btn svg { width: 19px; height: 19px; display: block; }
+  :root:not([data-theme="dark"]) .icon-sun { display: none; }
+  :root:not([data-theme="dark"]) .icon-moon { display: block; }
+  :root[data-theme="dark"] .icon-moon { display: none; }
+  :root[data-theme="dark"] .icon-sun { display: block; }
+
+  /* ---- tag filters ---- */
+  .filters { display: flex; flex-wrap: wrap; gap: 6px; margin-top: -4px; }
+  .pill {
+    appearance: none;
+    font-family: inherit;
+    font-size: 12px;
+    font-weight: 500;
+    line-height: 1;
+    padding: 8px 12px;
+    border-radius: 999px;
+    border: 1px solid var(--line);
+    background: var(--surface);
+    color: var(--ink-soft);
+    cursor: pointer;
+    transition: background .15s ease, color .15s ease, border-color .15s ease;
+  }
+  .pill:hover { color: var(--ink); border-color: var(--ink-faint); }
+  .pill[aria-pressed="true"] {
+    background: var(--accent);
+    border-color: var(--accent);
+    color: var(--accent-ink);
+  }
+  .pill:focus-visible { outline: 3px solid var(--accent); outline-offset: 2px; }
+
+  /* ---- the wall ---- */
+  .wall { display: grid; grid-template-columns: repeat(7, 1fr); gap: 4px; }
+  @media (min-width: 560px) { .wall { gap: 8px; } }
+
+  .tile {
+    display: block;
+    width: 100%;
+    aspect-ratio: 16 / 9;
+    border-radius: 3px;
+    overflow: hidden;
+    background: var(--surface-2);
+    transition: transform .12s ease, box-shadow .12s ease, opacity .12s ease;
+  }
+  @media (min-width: 560px) { .tile { border-radius: 6px; } }
+  .tile img { width: 100%; height: 100%; object-fit: cover; object-position: center; display: block; }
+  .tile:hover { transform: translateY(-2px); box-shadow: var(--shadow-sm); z-index: 1; }
+  .tile:focus-visible { outline: 3px solid var(--accent); outline-offset: 2px; z-index: 2; }
+  .tile.dim { opacity: .16; filter: grayscale(1); pointer-events: none; }
+  .tile.dim:hover { transform: none; box-shadow: none; }
+
+  /* ---- tile page ---- */
+  .hero {
+    width: 100%;
+    aspect-ratio: 1920 / 1080;
+    object-fit: cover;
+    display: block;
+    border-radius: 14px;
+    box-shadow: var(--shadow);
+    background: var(--surface-2);
+  }
+  .lead { display: flex; flex-direction: column; gap: 8px; }
+  .tag {
+    align-self: flex-start;
+    font-size: 11px;
+    font-weight: 500;
+    letter-spacing: .14em;
+    text-transform: uppercase;
+    color: var(--accent);
+    text-decoration: none;
+  }
+  .tag:hover { text-decoration: underline; }
+  .tag:focus-visible { outline: 3px solid var(--accent); outline-offset: 3px; }
+  .lead h2 {
+    margin: 0;
+    font-size: 26px;
+    line-height: 1.25;
+    font-weight: 600;
+    letter-spacing: -0.02em;
+    color: var(--ink);
+    text-wrap: balance;
+  }
+
+  .prose { display: flex; flex-direction: column; gap: 16px; max-width: 62ch; }
+  .prose p {
+    margin: 0;
+    font-size: 17px;
+    line-height: 1.68;
+    font-weight: 300;
+    color: var(--ink);
+  }
+
+  .pager { display: flex; flex-direction: column; gap: 10px; margin-top: 10px; }
+  .navbtn {
+    display: block;
+    width: 100%;
+    text-align: center;
+    border-radius: 999px;
+    padding: 15px 20px;
+    font-size: 16px;
+    font-weight: 500;
+    background: var(--surface);
+    color: var(--ink);
+    border: 1px solid var(--line);
+    text-decoration: none;
+    transition: border-color .15s ease;
+  }
+  .navbtn:hover { border-color: var(--ink-faint); }
+  .navbtn:focus-visible { outline: 3px solid var(--accent); outline-offset: 3px; }
+
+  [hidden] { display: none !important; }
+  @media (prefers-reduced-motion: reduce) { * { transition: none !important; } }
+
+</style>
+</head>
+<body>
+<div class="wrap wrap-wall">
+  <div class="topbar">
+    <h1>Culture Wall</h1>
+    <button class="theme-btn" id="themeBtn" type="button" aria-label="Switch between light and dark">
+      <svg class="icon-moon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><path d="M21 12.8A9 9 0 1 1 11.2 3a7 7 0 0 0 9.8 9.8z"/></svg>
+      <svg class="icon-sun" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="4"/><path d="M12 2v2M12 20v2M4.9 4.9l1.4 1.4M17.7 17.7l1.4 1.4M2 12h2M20 12h2M4.9 19.1l1.4-1.4M17.7 6.3l1.4-1.4"/></svg>
+    </button>
+  </div>
+
+  <div class="filters" id="filters" role="group" aria-label="Filter by tag">
+      <button class="pill" type="button" data-tag="" aria-pressed="true">All</button>
+      <button class="pill" type="button" data-tag="worth" aria-pressed="false">Worth</button>
+      <button class="pill" type="button" data-tag="failure" aria-pressed="false">Failure</button>
+      <button class="pill" type="button" data-tag="mission" aria-pressed="false">Mission</button>
+      <button class="pill" type="button" data-tag="growth" aria-pressed="false">Growth</button>
+      <button class="pill" type="button" data-tag="ownership" aria-pressed="false">Ownership</button>
+      <button class="pill" type="button" data-tag="candor" aria-pressed="false">Candor</button>
+      <button class="pill" type="button" data-tag="sharpen-each-other" aria-pressed="false">Sharpen Each Other</button>
+      <button class="pill" type="button" data-tag="we" aria-pressed="false">We</button>
+      <button class="pill" type="button" data-tag="perspective" aria-pressed="false">Perspective</button>
+      <button class="pill" type="button" data-tag="selling" aria-pressed="false">Selling</button>
+      <button class="pill" type="button" data-tag="hierarchy" aria-pressed="false">Hierarchy</button>
+  </div>
+
+  <div class="wall" id="wall">
+      <a class="tile" href="t/we-like-the-original-you-at-the-very-core.html" data-tag="worth" aria-label="We like the original you at the very core."><img src="tiles/002.jpg" alt=""></a>
+      <a class="tile" href="t/lift-while-we-climb.html" data-tag="sharpen-each-other" aria-label="Lift while we climb."><img src="tiles/024.jpg" alt=""></a>
+      <a class="tile" href="t/all-models-are-wrong-but-some-are-useful.html" data-tag="perspective" aria-label="All models are wrong, but some are useful."><img src="tiles/032.jpg" alt=""></a>
+      <a class="tile" href="t/risk-how-much-we-got-your-back.html" data-tag="growth" aria-label="Risk... How much we got your back."><img src="tiles/015.jpg" alt=""></a>
+      <a class="tile" href="t/hunger-is-the-best-spice.html" data-tag="growth" aria-label="Hunger is the best spice."><img src="tiles/013.jpg" alt=""></a>
+      <a class="tile" href="t/owners-own-their-relationships-employees-rent-them.html" data-tag="ownership" aria-label="Owners own their relationships. Employees rent them."><img src="tiles/018.jpg" alt=""></a>
+      <a class="tile" href="t/nobody-has-all-the-answers-thats-why-we-have-each-other.html" data-tag="we" aria-label="Nobody has all the answers. That’s why we have each other."><img src="tiles/028.jpg" alt=""></a>
+      <a class="tile" href="t/growth-mindset-begins-with-personal-growth.html" data-tag="growth" aria-label="Growth mindset begins with personal growth."><img src="tiles/012.jpg" alt=""></a>
+      <a class="tile" href="t/enthusiasm-is-shallow-passion-runs-deep.html" data-tag="mission" aria-label="Enthusiasm is shallow. Passion runs deep."><img src="tiles/005.jpg" alt=""></a>
+      <a class="tile" href="t/the-best-way-to-sell-is-to-create-experiences-and-meaning.html" data-tag="selling" aria-label="The best way to sell is to create experiences and meaning."><img src="tiles/033.jpg" alt=""></a>
+      <a class="tile" href="t/create-growth-by-creating-the-problem.html" data-tag="growth" aria-label="Create growth by creating the problem."><img src="tiles/011.jpg" alt=""></a>
+      <a class="tile" href="t/one-bad-apple-doesnt-write-the-rules.html" data-tag="we" aria-label="One bad apple doesn’t write the rules."><img src="tiles/029.jpg" alt=""></a>
+      <a class="tile" href="t/its-your-birthright-to-matter-purpose-is-how-you-make-it.html" data-tag="mission" aria-label="It’s your birthright to matter. Purpose is how you make it happen."><img src="tiles/006.jpg" alt=""></a>
+      <a class="tile" href="t/assume-good-intent.html" data-tag="candor" aria-label="Assume good intent."><img src="tiles/020.jpg" alt=""></a>
+      <a class="tile" href="t/hierarchical-on-the-inside-flat-on-the-outside.html" data-tag="hierarchy" aria-label="Hierarchical on the inside. Flat on the outside."><img src="tiles/035.jpg" alt=""></a>
+      <a class="tile" href="t/we-have-fun.html" data-tag="we" aria-label="We have fun!"><img src="tiles/031.jpg" alt=""></a>
+      <a class="tile" href="t/foundational-stop-whining-start-owning.html" data-tag="ownership" aria-label="Foundational... Stop whining. Start owning."><img src="tiles/016.jpg" alt=""></a>
+      <a class="tile" href="t/from-me-to-we.html" data-tag="we" aria-label="From me to we."><img src="tiles/027.jpg" alt=""></a>
+      <a class="tile" href="t/mission-leads-to-money-not-vice-versa.html" data-tag="mission" aria-label="Mission leads to money, not vice versa."><img src="tiles/008.jpg" alt=""></a>
+      <a class="tile" href="t/ownership-can-only-be-accepted-not-assigned.html" data-tag="ownership" aria-label="Ownership can only be accepted, not assigned."><img src="tiles/019.jpg" alt=""></a>
+      <a class="tile" href="t/being-around-strong-people-requires-a-thick-skin.html" data-tag="candor" aria-label="Being around strong people requires a thick skin."><img src="tiles/021.jpg" alt=""></a>
+      <a class="tile" href="t/people-come-to-us-to-sharpen-their-sword-so-we-need-to.html" data-tag="sharpen-each-other" aria-label="People come to us to sharpen their sword, so we need to always be sharpening ours."><img src="tiles/025.jpg" alt=""></a>
+      <a class="tile" href="t/racing-cars-when-you-push-the-limits-you-crash-more-often.html" data-tag="growth" aria-label="Racing cars... When you push the limits, you crash more often. C’est la guerre."><img src="tiles/014.jpg" alt=""></a>
+      <a class="tile" href="t/people-are-human-hence-the-constant-need-for-forgiveness.html" data-tag="we" aria-label="People are human, hence the constant need for forgiveness. Put it behind you and move on."><img src="tiles/030.jpg" alt=""></a>
+      <a class="tile" href="t/truth-over-harmony.html" data-tag="candor" aria-label="Truth over harmony."><img src="tiles/023.jpg" alt=""></a>
+      <a class="tile" href="t/boss-is-not-a-useful-term.html" data-tag="hierarchy" aria-label="Boss is not a useful term."><img src="tiles/034.jpg" alt=""></a>
+      <a class="tile" href="t/the-ripple-effect-intention-making-a-difference-success.html" data-tag="mission" aria-label="The ripple effect... Intention → Making a difference → Success and money."><img src="tiles/009.jpg" alt=""></a>
+      <a class="tile" href="t/feedback-comes-from-the-heart-not-ego.html" data-tag="candor" aria-label="Feedback comes from the heart, not ego."><img src="tiles/022.jpg" alt=""></a>
+      <a class="tile" href="t/buy-the-decision.html" data-tag="growth" aria-label="Buy the decision."><img src="tiles/010.jpg" alt=""></a>
+      <a class="tile" href="t/learning-from-failure-is-essential-to-progress.html" data-tag="failure" aria-label="Learning from failure is essential to progress."><img src="tiles/003.jpg" alt=""></a>
+      <a class="tile" href="t/life-is-too-short-not-to-do-something-that-matters.html" data-tag="mission" aria-label="Life is too short not to do something that matters."><img src="tiles/007.jpg" alt=""></a>
+      <a class="tile" href="t/leadership-ownership.html" data-tag="ownership" aria-label="Leadership. Ownership."><img src="tiles/017.jpg" alt=""></a>
+      <a class="tile" href="t/when-we-level-up-we-elevate-each-others-journey.html" data-tag="sharpen-each-other" aria-label="When we level up, we elevate each other’s journey."><img src="tiles/026.jpg" alt=""></a>
+      <a class="tile" href="t/success-is-just-failure-thats-been-played-around-with-a.html" data-tag="failure" aria-label="Success is just failure that’s been played around with... a lot."><img src="tiles/004.jpg" alt=""></a>
+      <a class="tile" href="t/spit-on-it-stomp-on-it-tell-it-its-stupid-still-has-the.html" data-tag="worth" aria-label="Spit on it. Stomp on it. Tell it it&#x27;s stupid. Still has the same value."><img src="tiles/001.jpg" alt=""></a>
+  </div>
+</div>
+
+<script>
+(function () {
+  var wall = document.getElementById('wall');
+  var filters = document.getElementById('filters');
+
+  function apply(tag) {
+    Array.prototype.forEach.call(wall.children, function (el) {
+      el.classList.toggle('dim', !!tag && el.dataset.tag !== tag);
+    });
+    Array.prototype.forEach.call(filters.children, function (b) {
+      b.setAttribute('aria-pressed', String((b.dataset.tag || '') === (tag || '')));
+    });
+  }
+
+  Array.prototype.forEach.call(filters.children, function (b) {
+    b.addEventListener('click', function () {
+      var tag = b.dataset.tag || '';
+      location.hash = tag ? tag : '';
+      apply(tag);
+    });
+  });
+
+  function fromHash() {
+    var h = (location.hash || '').replace(/^#/, '');
+    var known = Array.prototype.some.call(filters.children, function (b) { return b.dataset.tag === h; });
+    apply(known ? h : '');
+  }
+  window.addEventListener('hashchange', fromHash);
+  fromHash();
+})();
+</script>
+<script>
+(function () {
+  var root = document.documentElement;
+  function applyTheme(t) {
+    root.setAttribute('data-theme', t);
+    try { localStorage.setItem('cw-theme', t); } catch (err) {}
+  }
+  var saved = 'light';
+  try { saved = localStorage.getItem('cw-theme') || 'light'; } catch (err) {}
+  applyTheme(saved === 'dark' ? 'dark' : 'light');
+  document.getElementById('themeBtn').addEventListener('click', function () {
+    applyTheme(root.getAttribute('data-theme') === 'dark' ? 'light' : 'dark');
+  });
+})();
+</script>
+</body>
+</html>
