@@ -5,21 +5,21 @@
 <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
 <title>We like the original you at the very core.</title>
 <meta name="description" content="Watch someone who has never been coached at a thing and you see how they actually came. A strategy nobody taught them. A way of playing that is just theirs.">
-<link rel="canonical" href="https://lushin-inc.github.io/culture-wall/t/we-like-the-original-you-at-the-very-core.html">
+<link rel="canonical" href="https://lushin-inc.github.io/wall/t/we-like-the-original-you-at-the-very-core.html">
 
 <meta property="og:type" content="website">
 <meta property="og:site_name" content="Culture Wall">
 <meta property="og:title" content="We like the original you at the very core.">
 <meta property="og:description" content="Watch someone who has never been coached at a thing and you see how they actually came. A strategy nobody taught them. A way of playing that is just theirs.">
-<meta property="og:url" content="https://lushin-inc.github.io/culture-wall/t/we-like-the-original-you-at-the-very-core.html">
-<meta property="og:image" content="https://lushin-inc.github.io/culture-wall/tiles/002.jpg">
-<meta property="og:image:secure_url" content="https://lushin-inc.github.io/culture-wall/tiles/002.jpg">
+<meta property="og:url" content="https://lushin-inc.github.io/wall/t/we-like-the-original-you-at-the-very-core.html">
+<meta property="og:image" content="https://lushin-inc.github.io/wall/tiles/002.jpg">
+<meta property="og:image:secure_url" content="https://lushin-inc.github.io/wall/tiles/002.jpg">
 <meta property="og:image:alt" content="We like the original you at the very core.">
 
 <meta name="twitter:card" content="summary_large_image">
 <meta name="twitter:title" content="We like the original you at the very core.">
 <meta name="twitter:description" content="Watch someone who has never been coached at a thing and you see how they actually came. A strategy nobody taught them. A way of playing that is just theirs.">
-<meta name="twitter:image" content="https://lushin-inc.github.io/culture-wall/tiles/002.jpg">
+<meta name="twitter:image" content="https://lushin-inc.github.io/wall/tiles/002.jpg">
 
 <meta name="theme-color" content="#F2F3F7">
 <meta name="apple-mobile-web-app-capable" content="yes">
@@ -98,7 +98,7 @@
     flex-direction: column;
     gap: 18px;
   }
-  .wrap-wall { max-width: 1180px; }
+  .wrap-wall { max-width: none; }
   .wrap-tile { max-width: 720px; }
 
   /* ---- top bar ---- */
@@ -144,6 +144,34 @@
   :root[data-theme="dark"] .icon-moon { display: none; }
   :root[data-theme="dark"] .icon-sun { display: block; }
 
+  /* ---- section switch ---- */
+  .switch {
+    display: inline-flex;
+    gap: 4px;
+    background: var(--surface-2);
+    border-radius: 999px;
+    padding: 4px;
+  }
+  .switch a {
+    display: block;
+    padding: 9px 18px;
+    border-radius: 999px;
+    font-size: 14px;
+    font-weight: 500;
+    line-height: 1;
+    color: var(--ink-soft);
+    text-decoration: none;
+    white-space: nowrap;
+    transition: background .15s ease, color .15s ease;
+  }
+  .switch a:hover { color: var(--ink); }
+  .switch a[aria-current="page"] {
+    background: var(--accent);
+    color: var(--accent-ink);
+    box-shadow: var(--shadow-sm);
+  }
+  .switch a:focus-visible { outline: 3px solid var(--accent); outline-offset: 2px; }
+
   /* ---- tag filters ---- */
   .filters { display: flex; flex-wrap: wrap; gap: 6px; margin-top: -4px; }
   .pill {
@@ -169,8 +197,25 @@
   .pill:focus-visible { outline: 3px solid var(--accent); outline-offset: 2px; }
 
   /* ---- the wall ---- */
-  .wall { display: grid; grid-template-columns: repeat(7, 1fr); gap: 4px; }
-  @media (min-width: 560px) { .wall { gap: 8px; } }
+  .wall {
+    --gap: 4px;
+    display: grid;
+    grid-template-columns: repeat(7, 1fr);
+    gap: var(--gap);
+    width: 100%;
+  }
+  @media (min-width: 560px) { .wall { --gap: 8px; } }
+
+  /* On a real screen the wall fills the window instead of sitting in a band at the top.
+     The cap keeps 5 rows of 16:9 tiles inside the viewport height; margin auto centers
+     whatever space is left over. */
+  @media (min-width: 900px) {
+    .wrap-wall { min-height: 100dvh; padding-block: 18px 24px; }
+    .wall {
+      max-width: calc(((100dvh - 172px - 4 * var(--gap)) / 5) * 16 / 9 * 7 + 6 * var(--gap));
+      margin: auto;
+    }
+  }
 
   .tile {
     display: block;

@@ -5,21 +5,21 @@
 <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
 <title>Culture Wall</title>
 <meta name="description" content="All 35 culture tiles in wall order. Open any tile to read what it means.">
-<link rel="canonical" href="https://lushin-inc.github.io/culture-wall/">
+<link rel="canonical" href="https://lushin-inc.github.io/wall/">
 
 <meta property="og:type" content="website">
 <meta property="og:site_name" content="Culture Wall">
 <meta property="og:title" content="Culture Wall">
 <meta property="og:description" content="All 35 culture tiles in wall order. Open any tile to read what it means.">
-<meta property="og:url" content="https://lushin-inc.github.io/culture-wall/">
-<meta property="og:image" content="https://lushin-inc.github.io/culture-wall/og.png">
-<meta property="og:image:secure_url" content="https://lushin-inc.github.io/culture-wall/og.png">
+<meta property="og:url" content="https://lushin-inc.github.io/wall/">
+<meta property="og:image" content="https://lushin-inc.github.io/wall/og.png">
+<meta property="og:image:secure_url" content="https://lushin-inc.github.io/wall/og.png">
 <meta property="og:image:alt" content="Culture Wall">
 
 <meta name="twitter:card" content="summary_large_image">
 <meta name="twitter:title" content="Culture Wall">
 <meta name="twitter:description" content="All 35 culture tiles in wall order. Open any tile to read what it means.">
-<meta name="twitter:image" content="https://lushin-inc.github.io/culture-wall/og.png">
+<meta name="twitter:image" content="https://lushin-inc.github.io/wall/og.png">
 
 <meta name="theme-color" content="#F2F3F7">
 <meta name="apple-mobile-web-app-capable" content="yes">
@@ -98,7 +98,7 @@
     flex-direction: column;
     gap: 18px;
   }
-  .wrap-wall { max-width: 1180px; }
+  .wrap-wall { max-width: none; }
   .wrap-tile { max-width: 720px; }
 
   /* ---- top bar ---- */
@@ -144,6 +144,34 @@
   :root[data-theme="dark"] .icon-moon { display: none; }
   :root[data-theme="dark"] .icon-sun { display: block; }
 
+  /* ---- section switch ---- */
+  .switch {
+    display: inline-flex;
+    gap: 4px;
+    background: var(--surface-2);
+    border-radius: 999px;
+    padding: 4px;
+  }
+  .switch a {
+    display: block;
+    padding: 9px 18px;
+    border-radius: 999px;
+    font-size: 14px;
+    font-weight: 500;
+    line-height: 1;
+    color: var(--ink-soft);
+    text-decoration: none;
+    white-space: nowrap;
+    transition: background .15s ease, color .15s ease;
+  }
+  .switch a:hover { color: var(--ink); }
+  .switch a[aria-current="page"] {
+    background: var(--accent);
+    color: var(--accent-ink);
+    box-shadow: var(--shadow-sm);
+  }
+  .switch a:focus-visible { outline: 3px solid var(--accent); outline-offset: 2px; }
+
   /* ---- tag filters ---- */
   .filters { display: flex; flex-wrap: wrap; gap: 6px; margin-top: -4px; }
   .pill {
@@ -169,8 +197,25 @@
   .pill:focus-visible { outline: 3px solid var(--accent); outline-offset: 2px; }
 
   /* ---- the wall ---- */
-  .wall { display: grid; grid-template-columns: repeat(7, 1fr); gap: 4px; }
-  @media (min-width: 560px) { .wall { gap: 8px; } }
+  .wall {
+    --gap: 4px;
+    display: grid;
+    grid-template-columns: repeat(7, 1fr);
+    gap: var(--gap);
+    width: 100%;
+  }
+  @media (min-width: 560px) { .wall { --gap: 8px; } }
+
+  /* On a real screen the wall fills the window instead of sitting in a band at the top.
+     The cap keeps 5 rows of 16:9 tiles inside the viewport height; margin auto centers
+     whatever space is left over. */
+  @media (min-width: 900px) {
+    .wrap-wall { min-height: 100dvh; padding-block: 18px 24px; }
+    .wall {
+      max-width: calc(((100dvh - 172px - 4 * var(--gap)) / 5) * 16 / 9 * 7 + 6 * var(--gap));
+      margin: auto;
+    }
+  }
 
   .tile {
     display: block;
@@ -255,7 +300,10 @@
 <body>
 <div class="wrap wrap-wall">
   <div class="topbar">
-    <h1>Culture Wall</h1>
+    <nav class="switch" aria-label="Sections">
+      <a href="index.html" aria-current="page">Culture Wall</a>
+      <a href="remember/index.html">Remember</a>
+    </nav>
     <button class="theme-btn" id="themeBtn" type="button" aria-label="Switch between light and dark">
       <svg class="icon-moon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><path d="M21 12.8A9 9 0 1 1 11.2 3a7 7 0 0 0 9.8 9.8z"/></svg>
       <svg class="icon-sun" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="4"/><path d="M12 2v2M12 20v2M4.9 4.9l1.4 1.4M17.7 17.7l1.4 1.4M2 12h2M20 12h2M4.9 19.1l1.4-1.4M17.7 6.3l1.4-1.4"/></svg>
